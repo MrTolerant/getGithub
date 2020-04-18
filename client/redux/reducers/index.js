@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
-import gitHub from './gitHub'
+import repositories from './repositories'
 
 const createRootReducer = (history) =>
   combineReducers({
-    gitHub,
+    repositories,
     router: connectRouter(history)
   })
 

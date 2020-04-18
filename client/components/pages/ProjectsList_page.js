@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getProjectsList } from '../../redux/reducers/gitHub'
+import { getProjectsList } from '../../redux/reducers/repositories'
 
 import Head from '../head'
 
 const ProjectsListPage = () => {
-  const list = useSelector((state) => state.gitHub.list)
+  const list = useSelector((state) => state.repositories.list)
   const dispatch = useDispatch()
   const { user } = useParams()
 
@@ -17,15 +17,14 @@ const ProjectsListPage = () => {
   return (
     <div>
       <Head title="Projects list" />
-      <div className="flex items-center justify-center h-screen">
-        <div className="bg-indigo-800 text-white font-bold rounded-lg border shadow-lg p-10">
-          <p>{user} Projects list</p>
-          {list.length &&
-            list.map((project) => (
-              <div key={project.name} className="flex">
-                {project.name}
-              </div>
-            ))}
+      <div className="flex flex-col items-center justify-center h-screen">
+        <p className="antialiased text-4xl m-4 text-gray-700 font-bold ">{user.toUpperCase()}</p>
+        <div className=" text-indigo-500  font-bold rounded-lg border shadow-lg p-10 hove:text-indigo-400 ">
+          {list.map((project) => (
+            <div key={project.name} className="flex my-2">
+              <Link to={`/${user}/${project.name}`}>{project.name}</Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>

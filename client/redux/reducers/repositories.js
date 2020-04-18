@@ -7,7 +7,7 @@ const getProjectsUrl = (user) => `https://api.github.com/users/${user}/repos`
 
 const initialState = {
   user: null,
-  list: [],
+  list: [{ name: '' }],
   readme: ''
 }
 
@@ -34,13 +34,15 @@ export default (state = initialState, action) => {
 
 export function getProjectsList(user) {
   return (dispatch) => {
-    const list = axios.get(getProjectsUrl(user))
-    // eslint-disable-next-line no-console
-    console.log(list)
-    dispatch({
-      list,
-      user,
-      type: GET_PROJECTS_LIST
-    })
+    axios
+      .get(getProjectsUrl(user))
+      .then(({ data }) => data)
+      .then((list) => {
+        dispatch({
+          list,
+          user,
+          type: GET_PROJECTS_LIST
+        })
+      })
   }
 }
