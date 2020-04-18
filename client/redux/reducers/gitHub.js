@@ -3,11 +3,11 @@ import axios from 'axios'
 const GET_PROJECT_README = 'GET_PROJECT_README'
 const GET_PROJECTS_LIST = 'GET_PROJECTS_LIST'
 const getProjectsUrl = (user) => `https://api.github.com/users/${user}/repos`
-const getReadmeUrl = (user, project) => `https://api.github.com/repos/${user}/${project}/readme`
+// const getReadmeUrl = (user, project) => `https://api.github.com/repos/${user}/${project}/readme`
 
 const initialState = {
   user: null,
-  projects: [],
+  list: [],
   readme: ''
 }
 
@@ -32,9 +32,11 @@ export default (state = initialState, action) => {
   }
 }
 
-export async function getProjectsList(user) {
-  return async (dispatch) => {
-    const list = await axios.get(getProjectsUrl(user))
+export function getProjectsList(user) {
+  return (dispatch) => {
+    const list = axios.get(getProjectsUrl(user))
+    // eslint-disable-next-line no-console
+    console.log(list)
     dispatch({
       list,
       user,

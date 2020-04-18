@@ -19,7 +19,6 @@ const NotFound = () => {
           tabIndex="0"
           onClick={() => handleGoHome()}
         >
-          {' '}
           Back to Dashboard
         </button>
       </div>
