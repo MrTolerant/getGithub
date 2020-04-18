@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux'
+import { getProjectsList, clearState } from '../../redux/reducers/repositories'
 import Head from '../head'
 
 const SearchPage = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    dispatch(clearState())
+  }, [dispatch])
+
   const handleSearch = () => {
-    if (user && user.length > 1) history.push(`/${user}`)
+    if (user && user.length > 1) {
+      dispatch(getProjectsList(user))
+      history.push(`/${user}`)
+    }
   }
   const handleChange = (e) => {
     setUser(e.target.value)
@@ -16,7 +26,7 @@ const SearchPage = () => {
   return (
     <div>
       <Head title="Search github user" />
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen hs-dummy-scrollbar-size">
         <div className="flex flex-col p-2 m-auto shadow-lg rounded ">
           <span className="antialiased text-indigo-500 text-2xl text-center">Enter user</span>
           <form onSubmit={handleSearch} className="m-4 p-2 relative mx-auto text-gray-600">

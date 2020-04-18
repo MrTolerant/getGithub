@@ -9,6 +9,7 @@ import store, { history } from '../redux'
 import ProjectPage from '../components/pages/Project_page.js'
 import ProjectsListPage from '../components/pages/ProjectsList_page'
 import SearchPage from '../components/pages/Search_page'
+import NavBar from '../components/NavBar'
 
 import NotFound from '../components/404'
 
@@ -16,6 +17,7 @@ export default (props) => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history} location={props.location} context={props.context}>
+        <NavBar />
         <Router>
           <Switch>
             <Route exact path="/" component={() => <SearchPage />} />

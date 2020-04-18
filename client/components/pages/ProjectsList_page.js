@@ -7,21 +7,24 @@ import Head from '../head'
 
 const ProjectsListPage = () => {
   const list = useSelector((state) => state.repositories.list)
+  const currentUser = useSelector((state) => state.repositories.user)
   const dispatch = useDispatch()
   const { user } = useParams()
 
   useEffect(() => {
-    dispatch(getProjectsList(user))
-  }, [dispatch, user])
+    if (currentUser !== user) dispatch(getProjectsList(user))
+  }, [dispatch, user, currentUser])
 
   return (
     <div>
       <Head title="Projects list" />
       <div className="flex flex-col items-center justify-center h-screen">
-        <p className="antialiased text-4xl m-4 text-gray-700 font-bold ">{user.toUpperCase()}</p>
-        <div className=" text-indigo-500  font-bold rounded-lg border shadow-lg p-10 hove:text-indigo-400 ">
+        <div className="rounded-lg border shadow-lg p-10 ">
           {list.map((project) => (
-            <div key={project.name} className="flex my-2">
+            <div
+              key={project.name}
+              className=" text-gray-700  text-2xl rounded font-bold  flex my-2 hover:text-indigo-600 "
+            >
               <Link to={`/${user}/${project.name}`}>{project.name}</Link>
             </div>
           ))}
