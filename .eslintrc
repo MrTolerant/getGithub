@@ -46,6 +46,7 @@
     "comma-dangle": "off",
     "class-methods-use-this": "off",
     "quote-props": "off",
+    "implicit-arrow-linebreak": "off",
     "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }],
     "react/destructuring-assignment": "off",
     "react/jsx-wrap-multilines": "off",
